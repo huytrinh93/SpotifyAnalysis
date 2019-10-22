@@ -4,26 +4,27 @@ from django.shortcuts import render
 import sys
 import spotipy
 import spotipy.util as util
+import json
 
-def index(request):
-	#token = util.oauth2.SpotifyClientCredentials(client_id='3dc7856c74e34c66bbcac293cfd18775', client_secret='51a6d9fede274298872af6c85313fa0b')
-
-	#cache_token = token.get_access_token()
-	#spotify = spotipy.Spotify(cache_token)
-
-	#results1 = spotify.user_playlist_tracks(USER, PLAY_LIST, limit=100, offset=0)
-	
+def index(request):	
 	client_credentials_manager = util.oauth2.SpotifyClientCredentials('3dc7856c74e34c66bbcac293cfd18775', '51a6d9fede274298872af6c85313fa0b')
 
 	spotify = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 	results = spotify.search("Boys", limit=1)
 
-	results = results['tracks']['items'][0]  # Find top result
-	album = results['album']['name']  # Parse json dictionary
-	artist = results['album']['artists'][0]['name']
-	artists = results['album']['artists']
-	song_title = results['name']
-	album_art = results['album']['images'][0]['url']
+	result0 = results['tracks']['items'][0]  # Find top result
+	
+	album = result0['album']['name']  # Parse json dictionary
+	artist = result0['album']['artists'][0]['name']
+	artists = result0['album']['artists']
+	song_title = result0['name']
+	album_art = result0['album']['images'][0]['url']
+	
+	pretty_data = json.dumps(results['tracks']['items'], sort_keys=True, indent=4)
 
-	context = {'artists': artist}
+	context = {
+		'results' : pretty_data,
+		'artists': artist,
+		'albums' : album,
+	}
 	return render(request,'app/index.html', context)

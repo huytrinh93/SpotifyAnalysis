@@ -54,7 +54,7 @@ ROOT_URLCONF = 'SpotifyAnalysis.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [r'C:\Users\hntrinh1\Desktop\Personal Project\SpotifyAnalysis\visualize\templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'visualize/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
