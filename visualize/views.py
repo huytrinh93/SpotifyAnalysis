@@ -67,8 +67,6 @@ def index(request):
 	distinctLists = Get_Exclude_and_Include_List(compareResult[0]['trackMarket'], compareResult[1]['trackMarket'])
 	labels = ['Not Popular in Region', 'Populate in Regions']
 	colors = ['r', 'g']
-	plt.pie(slices_hours, labels=activities, colors=colors, startangle=90, autopct='%.1f%%')
-	plt.show()
 
 	context = {
 		'compareResult' : compareResult,
