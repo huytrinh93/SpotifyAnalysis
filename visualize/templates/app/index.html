@@ -1,3 +1,14 @@
-<h1>Artists:</h1>
-<p>{{ artists }}</p>
-	<p>{{ results }}</p>
+{% for item in compareResult %}
+
+<h1>Albumn: {{ item.albumName }}</h1>
+<p>Artist: {{ item.artist }}</p>
+<p>Track: {{ item.trackName }}</p>
+<h5>Duration: {{ item.trackTime.0 }}:{{ item.trackTime.1 | stringformat:"02d" }}</h5>
+<h5>Popularity: {{ item.popularity }} </h5>
+
+<p>{{ item.trackMarket }}</p>
+<p>{{ item.albumMarket  }}</p>
+
+	
+{% endfor %}
+<p>{{ distinctLists.0 }} ---- {{ distinctLists.1 }} </p>
