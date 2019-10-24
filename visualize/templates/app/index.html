@@ -1,3 +1,69 @@
-<h1>Artists:</h1>
-<p>{{ artists }}</p>
-	<p>{{ results }}</p>
+<!doctype html>
+<html>
+<head>
+<script src="https://code.highcharts.com/highcharts.src.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+
+</head>
+<body>
+{% for item in compareResult %}
+
+	<h1>Albumn: {{ item.albumName }}</h1>
+	<p>Artist: {{ item.artist }}</p>
+	<p>Track: {{ item.trackName }}</p>
+	<h5>Duration: {{ item.trackTime.0 }}:{{ item.trackTime.1 | stringformat:"02d" }}</h5>
+	<h5>Popularity: {{ item.popularity }} </h5>
+
+	<p>{{ item.trackMarket }}</p>
+	<p>{{ item.albumMarket  }}</p>
+
+{% endfor %}
+<p>{{ distinctLists.0 }} ---- {{ distinctLists.1 }} </p>
+<div id="chartPie"></div>
+<script>
+//_label = {{ distinctLists|safe }};
+//_values = {{ labels|safe }};
+Highcharts.chart(
+	"chartPie", {
+	chart: {
+        type: 'pie'
+    },
+    title: {
+        text: 'Regions popularity'
+    },
+    series: [{
+        name: 'Brands',
+        data: [{
+            name: 'Chrome',
+            y: 61.41,
+        }, {
+            name: 'Internet Explorer',
+            y: 11.84
+        }, {
+            name: 'Firefox',
+            y: 10.85
+        }, {
+            name: 'Edge',
+            y: 4.67
+        }, {
+            name: 'Safari',
+            y: 4.18
+        }, {
+            name: 'Sogou Explorer',
+            y: 1.64
+        }, {
+            name: 'Opera',
+            y: 1.6
+        }, {
+            name: 'QQ',
+            y: 1.2
+        }, {
+            name: 'Other',
+            y: 2.61
+        }]
+    }]
+});
+</script>
+</body>
+</html>
